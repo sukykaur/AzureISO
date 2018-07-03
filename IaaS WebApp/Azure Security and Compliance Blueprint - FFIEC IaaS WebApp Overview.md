@@ -1,24 +1,24 @@
 ---
-title: Azure Security and Compliance Blueprint - IaaS Web Application for FFIEC
-description: Azure Security and Compliance Blueprint - IaaS Web Application for FFIEC
+title: Azure Security and Compliance Blueprint - IaaS Web Application for ISO 27001 and 27018
+description: Azure Security and Compliance Blueprint - IaaS Web Application for ISO 27001 and 27018
 services: security
-author: meladie
+author: John Molesky
 
-ms.assetid: 8577e982-8bc0-4817-a16e-adf2ffefc6f5
+ms.assetid: 279bdad5-44c0-4822-9392-61491ea6583e
 ms.service: security
 ms.topic: article
-ms.date: 06/20/2018
-ms.author: meladie
+ms.date: 07/31/2018
+ms.author: John Molesky
 ---
-# Azure Security and Compliance Blueprint: IaaS Web Application for FFIEC Financial Services
+# Azure Security and Compliance Blueprint: IaaS Web Application for ISO 27001 and 27018
 
 ## Overview
 
-This Azure Security and Compliance Blueprint provides guidance for the deployment of an infrastructure as a service (IaaS) environment suitable for the collection, storage, and retrieval of financial data regulated by the Federal Financial Institution Examination Council (FFIEC).
+This Azure Security and Compliance Blueprint provides guidance for the deployment of an infrastructure as a service (IaaS) environment suitable for the collection, storage, and retrieval of information from businesses following the requirements of ISO 27001 and 27018.
 
-This reference architecture, implementation guide, and threat model provide a foundation for customers to comply with FFIEC requirements. This solution provides a baseline to help customers deploy workloads to Azure in a FFIEC compliant manner, however, this solution should not be used as-is in a production environment because additional configuration is required.
+This reference architecture, implementation guide, and threat model provide a foundation for customers to comply with ISO 27001 and 27018 requirements. This solution provides a baseline to help customers deploy workloads to Azure in a manner compliant with these ISO documents; however, this solution should not be used as-is in a production environment because additional configuration is required.
 
-Achieving FFIEC-compliance requires that qualified auditors certify a production customer solution. Audits are overseen by examiners from FFIEC’s member agencies, including the Board of Governors of the Federal Reserve System (FRB), the Federal Deposit Insurance Corporation (FDIC), the National Credit Union Administration (NCUA), the Office of the Comptroller of the Currency (OCC), and the Consumer Financial Protection Bureau (CFPB). These examiners certify that audits are completed by assessors who maintain independence from the audited institution. Customers are responsible for conducting appropriate security and compliance assessments of any solution built using this architecture, as requirements may vary based on the specifics of each customer's implementation.
+ISO 27001 centers on information security management systems (ISMSs), which are structured approaches to information management where security is the main focus. Achieving compliance with ISO 27001 requires that a business's ISMS meets the requirements laid out in this ISO document through the application of a risk management process. Achieving compliance with ISO 27018 requires that Cloud Service Providers (CSPs) follow this ISO document's structured guidance to protect personal information on the cloud. Customers are responsible for conducting appropriate security and compliance assessments of any solution built using this architecture, as requirements may vary based on the specifics of each customer's implementation.
 
 ## Architecture diagram and components
 
@@ -30,7 +30,7 @@ For enhanced security, all resources in this solution are managed as a resource 
 
 A management bastion host provides a secure connection for administrators to access deployed resources. **Microsoft recommends configuring a VPN or ExpressRoute connection for management and data import into the reference architecture subnet.**
 
-![IaaS WebApp for FFIEC Reference Architecture](Azure%20Security%20and%20Compliance%20Blueprint%20-%20FFIEC%20IaaS%20WebApp%20Reference%20Architecture.png)
+![IaaS WebApp for ISO 27001 and 27018 Reference Architecture](Azure%20Security%20and%20Compliance%20Blueprint%20-%20FFIEC%20IaaS%20WebApp%20Reference%20Architecture.png)
 
 This solution uses the following Azure services. Details of the deployment architecture are located in the [deployment architecture](#deployment-architecture) section.
 
@@ -99,7 +99,7 @@ Azure encrypts all communications to and from Azure datacenters by default. Addi
 
 The architecture protects data at rest through encryption, database auditing, and other measures.
 
-**Azure Storage**: To meet encrypted data at rest requirements, all [Azure Storage](https://azure.microsoft.com/services/storage/) uses [Storage Service Encryption](https://docs.microsoft.com/azure/storage/storage-service-encryption). This helps protect and safeguard data in support of organizational security commitments and compliance requirements defined by FFIEC.
+**Azure Storage**: To meet encrypted data at rest requirements, all [Azure Storage](https://azure.microsoft.com/services/storage/) uses [Storage Service Encryption](https://docs.microsoft.com/azure/storage/storage-service-encryption). This helps protect and safeguard data in support of organizational security commitments and compliance requirements defined by ISO 27001 and 27018.
 
 **Azure Disk Encryption**: [Azure Disk Encryption](https://docs.microsoft.com/azure/security/azure-security-disk-encryption) leverages the BitLocker feature of Windows to provide volume encryption for data disks. The solution integrates with Azure Key Vault to help control and manage the disk-encryption keys.
 
@@ -190,13 +190,13 @@ The following Log Analytics [management solutions](https://docs.microsoft.com/az
 
 The data flow diagram for this reference architecture is available for [download](https://aka.ms/FFIECiaasdfd/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
 
-![IaaS WebApp for FFIEC Threat Model](Azure%20Security%20and%20Compliance%20Blueprint%20-%20FFIEC%20IaaS%20WebApp%20Threat%20Model.png)
+![IaaS WebApp for ISO 27001 and 27018 Threat Model](Azure%20Security%20and%20Compliance%20Blueprint%20-%20FFIEC%20IaaS%20WebApp%20Threat%20Model.png)
 
 ## Compliance documentation
 
-The [Azure Security and Compliance Blueprint – FFIEC Customer Responsibility Matrix](https://aka.ms/FFIECcrm/) lists all security objectives required by FFIEC. This matrix details whether the implementation of each objective is the responsibility of Microsoft, the customer, or shared between the two.
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Customer Responsibility Matrix](https://aka.ms/FFIECcrm/) lists all security objectives required by ISO 27001 and 27018. This matrix details whether the implementation of each objective is the responsibility of Microsoft, the customer, or shared between the two.
 
-The [Azure Security and Compliance Blueprint – FFIEC IaaS Web Application Implementation Matrix](https://aka.ms/FFIECiaascim/) provides information on which FFIEC requirements are addressed by the IaaS web application architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 IaaS Web Application Implementation Matrix](https://aka.ms/FFIECiaascim/) provides information on which ISO 27001 and 27018 requirements are addressed by the IaaS web application architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
 
 ## Guidance and recommendations
 
