@@ -85,7 +85,7 @@ Use of App Service Environment for this architecture allows for the following co
 
 - Host inside a secured Azure virtual network and network security rules
 - Self-signed internal load balancer certificate for HTTPS communication. As a best practice, Microsoft recommends the use of a trusted certificate authority for enhanced security.
-- [Internal Load Balancing mode](https://docs.microsoft.com/azure/app-service-web/app-service-environment-with-internal-load-balancer)
+- [Internal load balancing mode](https://docs.microsoft.com/azure/app-service-web/app-service-environment-with-internal-load-balancer)
 - Disable [TLS 1.0](https://docs.microsoft.com/azure/app-service-web/app-service-app-service-environment-custom-settings)
 - Change [TLS cipher](https://docs.microsoft.com/azure/app-service-web/app-service-app-service-environment-custom-settings)
 - Control [inbound traffic N/W ports](https://docs.microsoft.com/azure/app-service-web/app-service-app-service-environment-control-inbound-traffic)
@@ -112,7 +112,7 @@ Each of the network security groups have specific ports and protocols open so th
 
 **Subnets**: Each subnet is associated with its corresponding network security group.
 
-**Azure DNS**: The Domain Name System, or DNS, is responsible for translating (or resolving) a website or service name to its IP address. [Azure DNS](https://docs.microsoft.com/azure/dns/dns-overview) is a hosting service for DNS domains that provides name resolution using Azure infrastructure. By hosting domains in Azure, users can manage DNS records using the same credentials, APIs, tools, and billing as other Azure services. Azure DNS also supports private DNS domains.
+**Azure DNS**: The Domain Name System (DNS) is responsible for translating (or resolving) a website or service name to its IP address. [Azure DNS](https://docs.microsoft.com/azure/dns/dns-overview) is a hosting service for DNS domains that provides name resolution using Azure infrastructure. By hosting domains in Azure, users can manage DNS records using the same credentials, APIs, tools, and billing as other Azure services. Azure DNS also supports private DNS domains.
 
 **Azure Load Balancer**: [Azure Load Balancer](https://docs.microsoft.com/azure/load-balancer/load-balancer-overview) allows customers to scale their applications and create high availability for services. Load Balancer supports inbound as well as outbound scenarios, and provides low latency, high throughput, and scales up to millions of flows for all TCP and UDP applications.
 
@@ -201,15 +201,15 @@ The following Log Analytics [management solutions](https://docs.microsoft.com/az
 
 ## Threat model
 
-The data flow diagram for this reference architecture is available for [download](https://aka.ms/FFIECpaasdfd/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
+The data flow diagram for this reference architecture is available for [download](https://aka.ms/ISOpaasdfd/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
 
 ![PaaS WebApp for ISO 27001 and 27018 Threat Model](Azure%20Security%20and%20Compliance%20Blueprint%20-%20FFIEC%20PaaS%20WebApp%20Threat%20Model.png)
 
 ## Compliance documentation
 
-The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Customer Responsibility Matrix](https://aka.ms/FFIECcrm/) lists all security objectives required by ISO 27001 and 27018. This matrix details whether the implementation of each objective is the responsibility of Microsoft, the customer, or shared between the two.
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Customer Responsibility Matrix](https://aka.ms/ISOcrm/) lists all security objectives required by ISO 27001 and 27018. This matrix details whether the implementation of each objective is the responsibility of Microsoft, the customer, or shared between the two.
 
-The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 PaaS Web Application Implementation Matrix](https://aka.ms/FFIECpaascim/) provides information on which ISO 27001 and 27018 requirements are addressed by the PaaS web application architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 PaaS Web Application Implementation Matrix](https://aka.ms/ISOpaascim/) provides information on which ISO 27001 and 27018 requirements are addressed by the PaaS web application architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
 
 ## Guidance and recommendations
 

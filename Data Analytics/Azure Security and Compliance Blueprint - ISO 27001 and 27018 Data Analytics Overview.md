@@ -167,15 +167,15 @@ The following Log Analytics [management solutions](https://docs.microsoft.com/az
 
 ## Threat model
 
-The data flow diagram for this reference architecture is available for [download](https://aka.ms/FFIECanalyticsdfd/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
+The data flow diagram for this reference architecture is available for [download](https://aka.ms/ISOanalyticsdfd/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
 
 ![Data Analytics for ISO 27001 and 27018 Threat Model](Azure%20Security%20and%20Compliance%20Blueprint%20-%20FFIEC%20Data%20Analytics%20Threat%20Model.png)
 
 ## Compliance documentation
 
-The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Customer Responsibility Matrix](https://aka.ms/FFIECcrm/) lists all objectives required by ISO 27001 and 27018. This matrix details whether the implementation of each objective is the responsibility of Microsoft, the customer, or shared between the two.
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Customer Responsibility Matrix](https://aka.ms/ISOcrm/) lists all objectives required by ISO 27001 and 27018. This matrix details whether the implementation of each objective is the responsibility of Microsoft, the customer, or shared between the two.
 
-The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Data Analytics Implementation Matrix](https://aka.ms/FFIECanalyticscim/) provides information on which ISO 27001 and 27018 objectives are addressed by the data analytics architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Data Analytics Implementation Matrix](https://aka.ms/ISOanalyticscim/) provides information on which ISO 27001 and 27018 objectives are addressed by the data analytics architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
 
 
 ## Guidance and recommendations
