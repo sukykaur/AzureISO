@@ -4,7 +4,7 @@ description: Azure Security and Compliance Blueprint - IaaS Web Application for 
 services: security
 author: John Molesky
 
-ms.assetid: 279bdad5-44c0-4822-9392-61491ea6583e
+ms.assetid: 28b7b7b4-f4a3-423a-93d8-6c01dd068b4d
 ms.service: security
 ms.topic: article
 ms.date: 07/31/2018

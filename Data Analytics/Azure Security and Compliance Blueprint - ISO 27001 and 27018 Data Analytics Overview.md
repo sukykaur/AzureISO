@@ -4,7 +4,7 @@ description: Azure Security and Compliance Blueprint - Data Analytics for ISO 27
 services: security
 author: John Molesky
 
-ms.assetid: 3f77f359-93b6-431a-a08d-0d33b2e6192a
+ms.assetid: dec23668-c7cc-41cf-aacd-5ec2ba9092da
 ms.service: security
 ms.topic: article
 ms.date: 07/31/2018

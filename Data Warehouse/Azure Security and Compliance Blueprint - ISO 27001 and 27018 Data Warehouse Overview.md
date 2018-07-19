@@ -4,7 +4,7 @@ description: Azure Security and Compliance Blueprint - Data Warehouse for ISO 27
 services: security
 author: John Molesky
 
-ms.assetid: 442f211a-5bb7-4d64-81a8-9e53c22b044f
+ms.assetid: 8038cf80-b85f-49f8-bb67-e1d937c7fbd8
 ms.service: security
 ms.topic: article
 ms.date: 07/31/2018

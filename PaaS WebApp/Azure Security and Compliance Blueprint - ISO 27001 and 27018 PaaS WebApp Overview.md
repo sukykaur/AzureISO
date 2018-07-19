@@ -4,7 +4,7 @@ description: Azure Security and Compliance Blueprint - PaaS Web Application for 
 services: security
 author: John Molesky
 
-ms.assetid: 2f59d37c-41e0-42c4-8b30-7d068d674ad9
+ms.assetid: cd0f00ec-aecc-4815-9c1e-05ae77c5c70b
 ms.service: security
 ms.topic: article
 ms.date: 07/31/2018
