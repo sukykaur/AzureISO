@@ -40,7 +40,7 @@ A virtual machine serves as a management bastion host, providing a secure connec
 
 ![Data Warehouse for ISO 27001 and 27018 reference architecture](/Data%20Warehouse/iso-dw-architecture.png "Data Warehouse for ISO 27001 and 27018 reference architecture")
 
-This solution uses the following Azure services. Details of the deployment architecture are in the [Deployment Architecture](#deployment-architecture) section.
+This solution uses the following Azure services. Details of the deployment architecture are in the [Deployment architecture](#deployment-architecture) section.
 
 - Availability Sets
     - Active Directory Domain Controllers

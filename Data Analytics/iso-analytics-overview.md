@@ -38,7 +38,7 @@ Azure SQL Database is commonly managed through SQL Server Management Studio (SSM
 
 ![Data Analytics for ISO 27001 and 27018 reference architecture](/Data%20Analytics/iso-analytics-architecture.png "Data Analytics for ISO 27001 and 27018 reference architecture")
 
-This solution uses the following Azure services. Details of the deployment architecture are in the [Deployment Architecture](#deployment-architecture) section.
+This solution uses the following Azure services. Details of the deployment architecture are in the [Deployment architecture](#deployment-architecture) section.
 
 - Application Insights
 - Azure Active Directory
