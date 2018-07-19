@@ -30,7 +30,7 @@ For enhanced security, all resources in this solution are managed as a resource 
 
 A management bastion host provides a secure connection for administrators to access deployed resources. **Microsoft recommends configuring a VPN or ExpressRoute connection for management and data import into the reference architecture subnet.**
 
-![IaaS WebApp for ISO 27001 and 27018 Reference Architecture](Azure%20Security%20and%20Compliance%20Blueprint%20-%20FFIEC%20IaaS%20WebApp%20Reference%20Architecture.png)
+![IaaS Web Application for ISO 27001 and 27018 reference architecture diagram](/IaaS%20WebApp/iso-iaaswa-architecture.png "IaaS Web Application for ISO 27001 and 27018 reference architecture diagram")
 
 This solution uses the following Azure services. Details of the deployment architecture are located in the [deployment architecture](#deployment-architecture) section.
 
@@ -187,7 +187,7 @@ The following Log Analytics [management solutions](https://docs.microsoft.com/az
 
 The data flow diagram for this reference architecture is available for [download](https://aka.ms/ISOiaasdfd/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
 
-![IaaS WebApp for ISO 27001 and 27018 Threat Model](Azure%20Security%20and%20Compliance%20Blueprint%20-%20FFIEC%20IaaS%20WebApp%20Threat%20Model.png)
+![IaaS Web Application for ISO 27001 and 27018 threat model](/IaaS%20WebApp/iso-iaaswa-threat-model.png "IaaS Web Application for ISO 27001 and 27018 threat model")
 
 ## Compliance documentation
 

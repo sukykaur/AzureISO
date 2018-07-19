@@ -1,20 +1,20 @@
 ---
-title: Azure Security and Compliance Blueprint - Data Analytics for ISO 27001 and 27018
-description: Azure Security and Compliance Blueprint - Data Analytics for ISO 27001 and 27018
+title: Azure Security and Compliance Blueprint - Data Warehouse for ISO 27001 and 27018
+description: Azure Security and Compliance Blueprint - Data Warehouse for ISO 27001 and 27018
 services: security
 author: John Molesky
 
-ms.assetid: dec23668-c7cc-41cf-aacd-5ec2ba9092da
+ms.assetid: 8038cf80-b85f-49f8-bb67-e1d937c7fbd8
 ms.service: security
 ms.topic: article
 ms.date: 07/31/2018
 ms.author: John Molesky
 ---
-# Azure Security and Compliance Blueprint: Analytics for ISO 27001 and 27018
+# Azure Security and Compliance Blueprint: Data Warehouse for ISO 27001 and 27018
 
 ## Overview
 
-This Azure Security and Compliance Blueprint provides guidance for the deployment of a data analytics architecture in Azure suitable for the collection, storage, and retrieval of information from businesses following the requirements of ISO 27001 and 27018.
+This Azure Security and Compliance Blueprint provides guidance for the deployment of a data warehouse architecture in Azure suitable for the collection, storage, and retrieval of information from businesses following the requirements of ISO 27001 and 27018.
 
 This reference architecture, implementation guide, and threat model provide a foundation for customers to comply with ISO 27001 and 27018 requirements. This solution provides a baseline to help customers deploy workloads to Azure in a manner compliant with these ISO documents; however, this solution should not be used as-is in a production environment because additional configuration is required.
 
@@ -22,67 +22,79 @@ ISO 27001 centers on information security management systems (ISMSs), which are 
 
 ## Architecture diagram and components
 
-This Azure Security and Compliance Blueprint provides an analytics platform upon which customers can build their own analytics tools. The reference architecture outlines a generic use case where customers input data either through bulk data imports by the SQL/Data Administrator or through operational data updates via an Operational User. Both work streams incorporate Azure Functions for importing data into Azure SQL Database. Azure Functions must be configured by the customer through the Azure portal to handle the import tasks unique to each customer's own analytics requirements.
+This solution provides a reference architecture which implements a high-performance and secure cloud data warehouse. There are two separate data tiers in this architecture: one where data is imported, stored, and staged within a clustered SQL environment, and another for the Azure SQL Data Warehouse where the data is loaded using an extract, transform, load tool (e.g. [PolyBase](https://docs.microsoft.com/azure/sql-data-warehouse/load-data-from-azure-blob-storage-using-polybase) T-SQL queries) for processing. Once data is stored in Azure SQL Data Warehouse, analytics can run at a massive scale.
 
-Azure offers a variety of reporting and analytics services for the customers. This solution incorporates Azure Machine Learning services in conjunction with Azure SQL Database to rapidly browse through data and deliver faster results through smarter modeling. Azure Machine Learning increases query speeds by discovering new relationships between datasets. Once the data has been trained through several statistical functions, up to 7 additional query pools (8 total including the customer server) can be synchronized with the same tabular models to spread query workloads and reduce response times.
+Azure offers a variety of reporting and analytics services for the customer. This solution includes SQL Server Reporting Services (SSRS) for quick creation of reports from the Azure SQL Data Warehouse. All SQL traffic is encrypted with SSL through the inclusion of self-signed certificates. As a best practice, Azure recommends the use of a trusted certificate authority for enhanced security.
 
-For enhanced analytics and reporting, Azure SQL Databases can be configured with columnstore indexes. Both Azure Machine Learning and Azure SQL Databases can be scaled up or down or shut off completely in response to customer usage. All SQL traffic is encrypted with SSL through the inclusion of self-signed certificates. As a best practice, Azure recommends the use of a trusted certificate authority for enhanced security.
+Data in the Azure SQL Data Warehouse is stored in relational tables with columnar storage, a format that significantly reduces the data storage costs while improving query performance. Depending on usage requirements, Azure SQL Data Warehouse compute resources can be scaled up or down or shut off completely if there are no active processes requiring compute resources.
 
-Once data is uploaded to the Azure SQL Database and trained by Azure Machine Learning, it is digested by both the Operational User and SQL/Data Admin with Power BI. Power BI displays data intuitively and pulls together information across multiple datasets to draw greater insight. Its high degree of adaptability and easy integration with Azure SQL Database ensures that customers can configure it to handle a wide array of scenarios as required by their business needs.
+A SQL Load Balancer manages SQL traffic, ensuring high performance. All virtual machines in this reference architecture deploy in an Availability Set with SQL Server instances configured in an Always On availability group for high-availability and disaster-recovery capabilities.
+
+This data warehouse reference architecture also includes an Active Directory tier for management of resources within the architecture. The Active Directory subnet enables easy adoption under a larger Active Directory forest structure, allowing for continuous operation of the environment even when access to the larger forest is unavailable. All virtual machines are domain-joined to the Active Directory tier and use Active Directory group policies to enforce security and compliance configurations at the operating system level.
 
 The solution uses Azure Storage accounts, which customers can configure to use Storage Service Encryption to maintain confidentiality of data at rest. Azure stores three copies of data within a customer's selected datacenter for resiliency. Geographic redundant storage ensures that data will be replicated to a secondary datacenter hundreds of miles away and again stored as three copies within that datacenter, preventing an adverse event at the customer's primary data center from resulting in a loss of data.
 
 For enhanced security, all resources in this solution are managed as a resource group through Azure Resource Manager. Azure Active Directory role-based access control is used for controlling access to deployed resources, including their keys in Azure Key Vault. System health is monitored through Azure Security Center and Azure Monitor. Customers configure both monitoring services to capture logs and display system health in a single, easily navigable dashboard.
 
-Azure SQL Database is commonly managed through SQL Server Management Studio (SSMS), which runs from a local machine configured to access the Azure SQL Database via a secure VPN or ExpressRoute connection. **Microsoft recommends configuring a VPN or ExpressRoute connection for management and data import into the reference architecture resource group**.
+A virtual machine serves as a management bastion host, providing a secure connection for administrators to access deployed resources. The data loads into the staging area through this management bastion host. **Microsoft recommends configuring a VPN or Azure ExpressRoute connection for management and data import into the reference architecture subnet.**
 
-![Data Analytics for ISO 27001 and 27018 Reference Architecture](Azure%20Security%20and%20Compliance%20Blueprint%20-%20FFIEC%20Data%20Analytics%20Reference%20Architecture.PNG)
+![Data Warehouse for ISO 27001 and 27018 reference architecture](/Data%20Warehouse/iso-dw-architecture.png "Data Warehouse for ISO 27001 and 27018 reference architecture")
 
 This solution uses the following Azure services. Details of the deployment architecture are in the [Deployment Architecture](#deployment-architecture) section.
 
-- Application Insights
+- Availability Sets
+    - Active Directory Domain Controllers
+    - SQL Cluster Nodes and Witness
 - Azure Active Directory
 - Azure Data Catalog
-- Azure Disk Encryption
-- Azure Event Grid
-- Azure Functions
 - Azure Key Vault
-- Azure Machine Learning
 - Azure Monitor
 - Azure Security Center
-- Azure SQL Database
+- Azure Load Balancer
 - Azure Storage
 - Azure Log Analytics
+- Azure Virtual Machines
+    - (1) Bastion Host
+    - (2) Active Directory domain controller
+    - (2) SQL Server Cluster Node
+    - (1) SQL Server Witness
 - Azure Virtual Network
-	- (1) /16 Network
-	- (2) /24 Networks
-	- (2) Network security groups
-- Power BI Dashboard
+    - (1) /16 Network
+    - (4) /24 Networks
+    - (4) Network security groups
+- Recovery Services Vault
+- SQL Data Warehouse
+- SQL Server Reporting Services
 
 ## Deployment architecture
 
 The following section details the deployment and implementation elements.
 
-**Azure Event Grid**:
-[Azure Event Grid](https://docs.microsoft.com/azure/event-grid/overview) allows customers to easily build applications with event-based architectures. Users select the Azure resource they would like to subscribe to and give the event handler or webhook an endpoint to send the event to. Customers can secure webhook endpoints by adding query parameters to the webhook URL when creating an Event Subscription. Azure Event Grid only supports HTTPS webhook endpoints. Azure Event Grid allows customers to control the level of access given to different users to do various management operations such as list event subscriptions, create new ones, and generate keys. Event Grid utilizes Azure role-based access control.
+**SQL Data Warehouse**: [SQL Data Warehouse](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-overview-what-is) is an Enterprise Data Warehouse (EDW) that leverages massively parallel processing (MPP) to quickly run complex queries across petabytes of data, allowing users to efficiently identify data. Users can use simple PolyBase T-SQL queries to import big data into the SQL Data Warehouse and utilize the power of MPP to run high-performance analytics.
 
-**Azure Functions**:
-[Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-overview) is a server-less compute service that enables users to run code on-demand without having to explicitly provision or manage infrastructure. Use Azure Functions to run a script or piece of code in response to a variety of events.
+**SQL Server Reporting Services (SSRS)**: [SQL Server Reporting Services](https://docs.microsoft.com/sql/reporting-services/report-data/sql-azure-connection-type-ssrs) provides quick creation of reports with tables, charts, maps, gauges, matrixes, and more for Azure SQL Data Warehouse.
 
-**Azure Machine Learning**:
-[Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/preview/) is a data science technique that allows computers to use existing data to forecast future behaviors, outcomes, and trends.
+**Data Catalog**: [Data Catalog](https://docs.microsoft.com/azure/data-catalog/data-catalog-what-is-data-catalog) makes data sources easily discoverable and understandable by the users who manage the data. Common data sources can be registered, tagged, and searched for specific data. The data remains in its existing location, but a copy of its metadata is added to Data Catalog, along with a reference to the data source location. The metadata is also indexed to make each data source easily discoverable via search and understandable to the users who discover it.
 
-**Azure Data Catalog**:
-[Data Catalog](https://docs.microsoft.com/azure/data-catalog/data-catalog-what-is-data-catalog) makes data sources easily discoverable and understandable by the users who manage the data. Common data sources can be registered, tagged, and searched for specific data. The data remains in its existing location, but a copy of its metadata is added to Data Catalog, along with a reference to the data source location. The metadata is also indexed to make each data source easily discoverable via search and understandable to the users who discover it.
+**Bastion host**: The bastion host is the single point of entry that allows users to access the deployed resources in this environment. The bastion host provides a secure connection to deployed resources by only allowing remote traffic from public IP addresses on a safe list. To permit remote desktop (RDP) traffic, the source of the traffic needs to be defined in the network security group.
+
+This solution creates a virtual machine as a domain-joined bastion host with the following configurations:
+-	[Antimalware extension](https://docs.microsoft.com/azure/security/azure-security-antimalware)
+-	[Azure diagnostics extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-extensions-diagnostics-template)
+-	[Azure Disk Encryption](https://docs.microsoft.com/azure/security/azure-security-disk-encryption) using Azure Key Vault
+-	An [auto-shutdown policy](https://azure.microsoft.com/blog/announcing-auto-shutdown-for-vms-using-azure-resource-manager/) to reduce consumption of virtual machine resources when not in use
+-	[Windows Defender Credential Guard](https://docs.microsoft.com/windows/access-protection/credential-guard/credential-guard) enabled so that credentials and other secrets run in a protected environment that is isolated from the running operating system.
 
 ### Virtual network
 
-The architecture defines a private virtual network with an address space of 10.200.0.0/16.
+This reference architecture defines a private virtual network with an address space of 10.0.0.0/16.
 
-**Network security groups**: [Network security groups](https://docs.microsoft.com/azure/virtual-network/virtual-networks-nsg) contain access control lists that allow or deny traffic within a virtual network. Network security groups can be used to secure traffic at a subnet or individual VM level. The following network security groups exist:
+**Network security groups**: [Network security groups](https://docs.microsoft.com/azure/virtual-network/virtual-networks-nsg) contain access control lists that allow or deny traffic within a virtual network. Network security groups can be used to secure traffic at a subnet or individual virtual machine level. The following network security groups exist:
 
-  - A network security group for Active Directory
-  - A network security group for the workload
+  -	A network security group for the data tier (SQL Server Clusters, SQL Server Witness, and SQL Load Balancer)
+  -	A network security group for the management bastion host
+  -	A network security group for Active Directory
+  - A network security group for SQL Server Reporting Services
 
 Each of the network security groups have specific ports and protocols open so that the solution can work securely and correctly. In addition, the following configurations are enabled for each network security group:
 
@@ -91,13 +103,9 @@ Each of the network security groups have specific ports and protocols open so th
 
 **Subnets**: Each subnet is associated with its corresponding network security group.
 
-### Data in transit
-
-Azure encrypts all communications to and from Azure datacenters by default. All transactions to Azure Storage through the Azure portal occur via HTTPS.
-
 ### Data at rest
 
-The architecture protects data at rest through encryption, database auditing, and other measures.
+The architecture protects data at rest through multiple measures, including encryption and database auditing.
 
 **Azure Storage**: To meet encrypted data at rest requirements, all [Azure Storage](https://azure.microsoft.com/services/storage/) uses [Storage Service Encryption](https://docs.microsoft.com/azure/storage/storage-service-encryption). This helps protect and safeguard data in support of organizational security commitments and compliance requirements defined by ISO 27001 and 27018.
 
@@ -137,11 +145,21 @@ The following technologies provide capabilities to manage access to data in the 
 - Diagnostics logs for Key Vault are enabled with a retention period of at least 365 days.
 - Permitted cryptographic operations for keys are restricted to the ones required.
 
+**Patch management**: Windows virtual machines deployed as part of this reference architecture are configured by default to receive automatic updates from Windows Update Service. This solution also includes the [Azure Automation](https://docs.microsoft.com/azure/automation/automation-intro) service through which updated deployments can be created to patch virtual machines when needed.
+
+**Malware protection**: [Microsoft Antimalware](https://docs.microsoft.com/azure/security/azure-security-antimalware) for virtual machines provides real-time protection capability that helps identify and remove viruses, spyware, and other malicious software, with configurable alerts when known malicious or unwanted software attempts to install or run on protected virtual machines.
+
 **Azure Security Center**: With [Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-intro), customers can centrally apply and manage security policies across workloads, limit exposure to threats, and detect and respond to attacks. Additionally, Azure Security Center accesses existing configurations of Azure services to provide configuration and service recommendations to help improve security posture and protect data.
 
 Azure Security Center uses a variety of detection capabilities to alert customers of potential attacks targeting their environments. These alerts contain valuable information about what triggered the alert, the resources targeted, and the source of the attack. Azure Security Center has a set of [predefined security alerts](https://docs.microsoft.com/en-us/azure/security-center/security-center-alerts-type), which are triggered when a threat, or suspicious activity takes place. [Custom alert rules](https://docs.microsoft.com/en-us/azure/security-center/security-center-custom-alert) in Azure Security Center allow customers to define new security alerts based on data that is already collected from their environment.
 
 Azure Security Center provides prioritized security alerts and incidents, making it simpler for customers to discover and address potential security issues. A [threat intelligence report](https://docs.microsoft.com/azure/security-center/security-center-threat-report) is generated for each detected threat to assist incident response teams in investigating and remediating threats.
+
+### Business continuity
+
+**High availability**: Server workloads are grouped in an [Availability Set](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) to help ensure high availability of virtual machines in Azure. At least one virtual machine is available during a planned or unplanned maintenance event, meeting the 99.95% Azure SLA.
+
+**Recovery Services Vault**: The [Recovery Services Vault](https://docs.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview) houses backup data and protects all configurations of Azure virtual machines in this architecture. With a Recovery Services Vault, customers can restore files and folders from an IaaS virtual machine without restoring the entire virtual machine, enabling faster restore times.
 
 ### Logging and auditing
 
@@ -157,32 +175,28 @@ The following Log Analytics [management solutions](https://docs.microsoft.com/az
 - [Agent Health](https://docs.microsoft.com/en-us/azure/operations-management-suite/oms-solution-agenthealth): The Agent Health solution reports how many agents are deployed and their geographic distribution, as well as how many agents which are unresponsive and the number of agents which are submitting operational data.
 -	[Activity Log Analytics](https://docs.microsoft.com/azure/log-analytics/log-analytics-activity): The Activity Log Analytics solution assists with analysis of the Azure activity logs across all Azure subscriptions for a customer.
 
-**Azure Automation**: [Azure Automation](https://docs.microsoft.com/azure/automation/automation-hybrid-runbook-worker) stores, runs, and manages runbooks. In this solution, runbooks help collect logs from Azure SQL Database. The Automation [change Tracking](https://docs.microsoft.com/azure/automation/automation-change-tracking) solution enables customers to easily identify changes in the environment.
+**Azure Automation**: [Azure Automation](https://docs.microsoft.com/azure/automation/automation-hybrid-runbook-worker) stores, runs, and manages runbooks. In this solution, runbooks help collect logs from Azure SQL Database. The Automation [Change Tracking](https://docs.microsoft.com/azure/automation/automation-change-tracking) solution enables customers to easily identify changes in the environment.
 
 **Azure Monitor**:
 [Azure Monitor](https://docs.microsoft.com/azure/monitoring-and-diagnostics/) helps users track performance, maintain security, and identify trends by enabling organizations to audit, create alerts, and archive data, including tracking API calls in their Azure resources.
 
-**Application Insights**:
-[Application Insights](https://docs.microsoft.com/azure/application-insights/) is an extensible Application Performance Management service for web developers on multiple platforms. It detects performance anomalies and includes powerful analytics tools to help diagnose issues and to understand what users actually do with the app. It's designed to help users continuously improve performance and usability.
-
 ## Threat model
 
-The data flow diagram for this reference architecture is available for [download](https://aka.ms/ISOanalyticsdfd/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
+The data flow diagram for this reference architecture is available for [download](https://aka.ms/ISOdwdfd/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
 
-![Data Analytics for ISO 27001 and 27018 Threat Model](Azure%20Security%20and%20Compliance%20Blueprint%20-%20FFIEC%20Data%20Analytics%20Threat%20Model.png)
+![Data Warehouse for ISO 27001 and 27018 threat model](/Data%20Warehouse/iso-dw-threat-model.png "Data Warehouse for ISO 27001 and 27018 threat model")
 
 ## Compliance documentation
 
 The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Customer Responsibility Matrix](https://aka.ms/ISOcrm/) lists all objectives required by ISO 27001 and 27018. This matrix details whether the implementation of each objective is the responsibility of Microsoft, the customer, or shared between the two.
 
-The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Data Analytics Implementation Matrix](https://aka.ms/ISOanalyticscim/) provides information on which ISO 27001 and 27018 objectives are addressed by the data analytics architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
-
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Data Warehouse Implementation Matrix](https://aka.ms/ISOdwcim/) provides information on which ISO 27001 and 27018 objectives are addressed by the data warehouse architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
 
 ## Guidance and recommendations
 
 ### VPN and ExpressRoute
 
-A secure VPN tunnel or [ExpressRoute](https://docs.microsoft.com/azure/expressroute/expressroute-introduction) needs to be configured to securely establish a connection to the resources deployed as a part of this data analytics reference architecture. By appropriately setting up a VPN or ExpressRoute, customers can add a layer of protection for data in transit.
+A secure VPN tunnel or [ExpressRoute](https://docs.microsoft.com/azure/expressroute/expressroute-introduction) needs to be configured to securely establish a connection to the resources deployed as a part of this data warehouse reference architecture. By appropriately setting up a VPN or ExpressRoute, customers can add a layer of protection for data in transit.
 
 By implementing a secure VPN tunnel with Azure, a virtual private connection between an on-premises network and an Azure Virtual Network can be created. This connection takes place over the Internet and allows customers to securely &quot;tunnel&quot; information inside an encrypted link between the customer&#39;s network and Azure. Site-to-site VPN is a secure, mature technology that has been deployed by enterprises of all sizes for decades. The [IPsec tunnel mode](https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2003/cc786385(v=ws.10)) is used in this option as an encryption mechanism.
 
@@ -192,10 +206,17 @@ Best practices for implementing a secure hybrid network that extends an on-premi
 
 ### Extract-Transform-Load process
 
-[PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide) can load data into Azure SQL Database without the need for a separate extract, transform, load or import tool. PolyBase allows access to data through T-SQL queries. Microsoft's business intelligence and analysis stack, as well as third-party tools compatible with SQL Server, can be used with PolyBase.
+[PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide) can load data into Azure SQL Data Warehouse without the need for a separate extract, transform, load or import tool. PolyBase allows access to data through T-SQL queries. Microsoft's business intelligence and analysis stack, as well as third-party tools compatible with SQL Server, can be used with PolyBase.
 
 ### Azure Active Directory setup
+
 [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-whatis) is essential to managing the deployment and provisioning access to personnel interacting with the environment. An existing Windows Server Active Directory can be integrated with Azure Active Directory in [four clicks](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-get-started-express). Customers can also tie the deployed Active Directory infrastructure (domain controllers) to an existing Azure Active Directory by making the deployed Active Directory infrastructure a subdomain of an Azure Active Directory forest.
+
+### Optional services
+
+Azure offers a variety of services to assist with the storage and staging of formatted and unformatted data. The following services can be added to this reference architecture depending on customer requirements:
+-	[Azure Data Factory](https://docs.microsoft.com/azure/data-factory/introduction) is a managed cloud service that is built for complex hybrid extract-transform-load, and data integration projects. Azure Data Factory has capabilities to help trace and locate specific data, including visualization and monitoring tools to identify when data arrived and where it came from. Using Azure Data Factory, customers can create and schedule data-driven workflows called pipelines that ingest data from disparate data stores. These pipelines allow customers to ingest data from both internal and external sources. Customers can then process and transform the data for output into data stores such as Azure SQL Data Warehouse.
+- Customers can stage unstructured data in [Azure Data Lake Store](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-overview), which enables the capture of data of any size, type, and ingestion speed in a single place for operational and exploratory analytics.  Azure Data Lake has capabilities that enable the extraction and conversion of data. Azure Data Lake Store is compatible with most open source components in the Hadoop ecosystem and integrates nicely with other Azure services such as Azure SQL Data Warehouse.
 
 ## Disclaimer
 

@@ -34,7 +34,7 @@ Azure SQL Database is commonly managed through SQL Server Management Studio, whi
 
 Furthermore, Application Insights provides real time application performance management and analytics through Log Analytics. **Microsoft recommends configuring a VPN or ExpressRoute connection for management and data import into the reference architecture subnet.**
 
-![PaaS WebApp for ISO 27001 and 27018 Reference Architecture](Azure%20Security%20and%20Compliance%20Blueprint%20-%20FFIEC%20PaaS%20WebApp%20Reference%20Architecture.png)
+![PaaS Web Application for ISO 27001 and 27018 reference architecture diagram](/PaaS%20WebApp/iso-paaswa-architecture.png "PaaS Web Application for ISO 27001 and 27018 reference architecture diagram")
 
 This solution uses the following Azure services. Details of the deployment architecture are in the [deployment architecture](#deployment-architecture) section.
 
@@ -203,7 +203,7 @@ The following Log Analytics [management solutions](https://docs.microsoft.com/az
 
 The data flow diagram for this reference architecture is available for [download](https://aka.ms/ISOpaasdfd/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
 
-![PaaS WebApp for ISO 27001 and 27018 Threat Model](Azure%20Security%20and%20Compliance%20Blueprint%20-%20FFIEC%20PaaS%20WebApp%20Threat%20Model.png)
+![PaaS Web Application for ISO 27001 and 27018 threat model](/PaaS%20WebApp/iso-paaswa-threat-model.png "PaaS Web Application for ISO 27001 and 27018 threat model")
 
 ## Compliance documentation
 
