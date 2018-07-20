@@ -182,15 +182,15 @@ The following Log Analytics [management solutions](https://docs.microsoft.com/az
 
 ## Threat model
 
-The data flow diagram for this reference architecture is available for [download](https://aka.ms/ISOdwdfd/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
+The data flow diagram for this reference architecture is available for [download](https://aka.ms/iso-dw-tm/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
 
 ![Data Warehouse for ISO 27001 and 27018 threat model](/Data%20Warehouse/iso-dw-threat-model.png "Data Warehouse for ISO 27001 and 27018 threat model")
 
 ## Compliance documentation
 
-The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Customer Responsibility Matrix](https://aka.ms/ISOcrm/) lists all objectives required by ISO 27001 and 27018. This matrix details whether the implementation of each objective is the responsibility of Microsoft, the customer, or shared between the two.
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Customer Responsibility Matrix](https://aka.ms/iso-crm/) lists all objectives required by ISO 27001 and 27018. This matrix details whether the implementation of each objective is the responsibility of Microsoft, the customer, or shared between the two.
 
-The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Data Warehouse Implementation Matrix](https://aka.ms/ISOdwcim/) provides information on which ISO 27001 and 27018 objectives are addressed by the data warehouse architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Data Warehouse Implementation Matrix](https://aka.ms/iso-dw-cim/) provides information on which ISO 27001 and 27018 objectives are addressed by the data warehouse architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
 
 ## Guidance and recommendations
 

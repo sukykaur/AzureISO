@@ -201,15 +201,15 @@ The following Log Analytics [management solutions](https://docs.microsoft.com/az
 
 ## Threat model
 
-The data flow diagram for this reference architecture is available for [download](https://aka.ms/ISOpaasdfd/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
+The data flow diagram for this reference architecture is available for [download](https://aka.ms/iso-paaswa-tm/) or can be found below. This model can help customers understand the points of potential risk in the system infrastructure when making modifications.
 
 ![PaaS Web Application for ISO 27001 and 27018 threat model](/PaaS%20WebApp/iso-paaswa-threat-model.png "PaaS Web Application for ISO 27001 and 27018 threat model")
 
 ## Compliance documentation
 
-The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Customer Responsibility Matrix](https://aka.ms/ISOcrm/) lists all security objectives required by ISO 27001 and 27018. This matrix details whether the implementation of each objective is the responsibility of Microsoft, the customer, or shared between the two.
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Customer Responsibility Matrix](https://aka.ms/iso-crm/) lists all security objectives required by ISO 27001 and 27018. This matrix details whether the implementation of each objective is the responsibility of Microsoft, the customer, or shared between the two.
 
-The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 PaaS Web Application Implementation Matrix](https://aka.ms/ISOpaascim/) provides information on which ISO 27001 and 27018 requirements are addressed by the PaaS web application architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 PaaS Web Application Implementation Matrix](https://aka.ms/iso-paaswa-cim/) provides information on which ISO 27001 and 27018 requirements are addressed by the PaaS web application architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
 
 ## Guidance and recommendations
 
