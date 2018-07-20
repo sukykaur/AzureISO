@@ -2,13 +2,13 @@
 title: Azure Security and Compliance Blueprint - IaaS Web Application for ISO 27001 and 27018
 description: Azure Security and Compliance Blueprint - IaaS Web Application for ISO 27001 and 27018
 services: security
-author: John Molesky
+author: jomolesk
 
 ms.assetid: 28b7b7b4-f4a3-423a-93d8-6c01dd068b4d
 ms.service: security
 ms.topic: article
 ms.date: 07/31/2018
-ms.author: John Molesky
+ms.author: jomolesk
 ---
 # Azure Security and Compliance Blueprint: IaaS Web Application for ISO 27001 and 27018
 
