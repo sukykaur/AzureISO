@@ -14,11 +14,11 @@ ms.author: John Molesky
 
 ## Overview
 
-This Azure Security and Compliance Blueprint provides guidance for the deployment of an infrastructure as a service (IaaS) environment suitable for the collection, storage, and retrieval of information from businesses following the requirements of ISO 27001 and 27018.
+ISO 27001 centers on an information security management system (ISMS), which is a structured approach to information management where security is the priority. Achieving compliance with ISO 27001 requires that an organization's ISMS meets the requirements defined in ISO 27001 through the application of a risk management process. Furthermore, ISO 27018 provides guidance for protecting personal information in the cloud.
 
-This reference architecture, implementation guide, and threat model provide a foundation for customers to comply with ISO 27001 and 27018 requirements. This solution provides a baseline to help customers deploy workloads to Azure in a manner compliant with these ISO documents; however, this solution should not be used as-is in a production environment because additional configuration is required.
+This Azure Security and Compliance Blueprint provides guidance to deploy an infrastructure as a service (IaaS) environment suitable for a simple Internet-facing web application. This solution demonstrates ways in which customers can meet specific security and compliance requirements of ISO 27001 and 27018 and serves as a foundation for customers to build and configure their own web applications in Azure.
 
-ISO 27001 centers on information security management systems (ISMSs), which are structured approaches to information management where security is the main focus. Achieving compliance with ISO 27001 requires that a business's ISMS meets the requirements laid out in this ISO document through the application of a risk management process. Achieving compliance with ISO 27018 requires that Cloud Service Providers (CSPs) follow this ISO document's structured guidance to protect personal information on the cloud. Customers are responsible for conducting appropriate security and compliance assessments of any solution built using this architecture, as requirements may vary based on the specifics of each customer's implementation.
+This reference architecture, associated implementation guide, and threat model are intended to serve as a foundation for customers to adapt to their specific requirements and shouldn't be used as-is in a production environment. Deploying this architecture without modification is insufficient to completely meet the requirements of NIST SP 800-171. Customers are responsible for conducting appropriate security and compliance assessments of any solution built using this architecture, as requirements may vary based on the specifics of each customer's implementation.
 
 ## Architecture diagram and components
 
