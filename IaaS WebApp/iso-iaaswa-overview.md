@@ -14,7 +14,7 @@ ms.author: jomolesk
 
 ## Overview
 
-ISO 27001 centers on an information security management system (ISMS), which is a structured approach to information management where security is the priority. Achieving compliance with ISO 27001 requires that an organization's ISMS meets the requirements defined in ISO 27001 through the application of a risk management process. Furthermore, ISO 27018 provides guidance for protecting personal information in the cloud.
+The International Organization for Standardization (ISO) is an independent non-government organization and the world’s largest developer of voluntary international standards.  The International Electrotechnical Commission (IEC) is the world’s leading organization for the preparation and publication of international standards for electrical, electronic, and related technologies. The ISO/IEC 27000 family of standards helps organizations of every type and size keep information assets secure. ISO/IEC 27001 is a security standard that formally specifies an Information Security Management System that is intended to bring information security under explicit management control. In 2014, the ISO adopted ISO/IEC 27018, an addendum to ISO/IEC 27001. Based on EU data-protection laws, it gives specific guidance to cloud service providers acting as processors of personally identifiable information (PII) on assessing risks and implementing state-of-the-art controls for protecting PII.
 
 This Azure Security and Compliance Blueprint provides guidance to deploy an infrastructure as a service (IaaS) environment suitable for a simple Internet-facing web application. This solution demonstrates ways in which customers can meet specific security and compliance requirements of ISO 27001 and 27018 and serves as a foundation for customers to build and configure their own web applications in Azure.
 
@@ -50,7 +50,6 @@ This solution uses the following Azure services. Details of the deployment archi
 - Azure Resource Manager
 - Azure Security Center
 - Azure Storage
-	- (7) Geo-redundant storage accounts
 - Azure Log Analytics
 - Azure Virtual Machines
 	- (1) management/bastion (Windows Server 2016 Datacenter)
@@ -60,7 +59,7 @@ This solution uses the following Azure services. Details of the deployment archi
 - Azure Virtual Network
 	- (1) /16 Network
 	- (5) /24 Networks
-	- (5) Network Security Groups
+	- (5) Network security groups
 - Cloud Witness
 - Recovery Services Vault
 
@@ -85,7 +84,7 @@ The architecture defines a private virtual network with an address space of 10.2
 
 See the configuration for [network security groups](https://github.com/Azure/fedramp-iaas-webapp/blob/master/nestedtemplates/virtualNetworkNSG.json) deployed with this solution. Organizations can configure network security groups by editing the file above using [this documentation](https://docs.microsoft.com/azure/virtual-network/virtual-networks-nsg) as a guide.
 
-Each of the subnets has a dedicated network Security Group:
+Each of the subnets has a dedicated network security group:
 - 1 network security group for Application Gateway (LBNSG)
 - 1 network security group for bastion host (MGTNSG)
 - 1 network security group for primary and backup domain controllers (ADNSG)
@@ -104,7 +103,7 @@ The architecture protects data at rest through encryption, database auditing, an
 **Azure Disk Encryption**: [Azure Disk Encryption](https://docs.microsoft.com/azure/security/azure-security-disk-encryption) leverages the BitLocker feature of Windows to provide volume encryption for data disks. The solution integrates with Azure Key Vault to help control and manage the disk-encryption keys.
 
 **SQL Server**: The SQL Server instance uses the following database security measures:
--	[SQL Server auditing](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-database-engine?view=sql-server-2017) tracks database events and writes them to audit logs.
+-	[SQL Server auditing](https://docs.microsoft.com/sql/relational-databases/security/auditing/sql-server-audit-database-engine?view=sql-server-2017) tracks database events and writes them to audit logs.
 -	[Transparent data encryption](https://docs.microsoft.com/sql/relational-databases/security/encryption/transparent-data-encryption?view=sql-server-2017) performs real-time encryption and decryption of the database, associated backups, and transaction log files to protect information at rest. Transparent data encryption provides assurance that stored data has not been subject to unauthorized access.
 -	[Firewall rules](https://docs.microsoft.com/azure/sql-database/sql-database-firewall-configure) prevent all access to database servers until proper permissions are granted. The firewall grants access to databases based on the originating IP address of each request.
 -	[Encrypted Columns](https://docs.microsoft.com/sql/relational-databases/security/encryption/always-encrypted-wizard?view=sql-server-2017) ensure that sensitive data never appears as plaintext inside the database system. After enabling data encryption, only client applications or application servers with access to the keys can access plaintext data.
@@ -140,7 +139,7 @@ The following technologies provide capabilities to manage access to data in the 
 
 **Azure Security Center**: With [Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-intro), customers can centrally apply and manage security policies across workloads, limit exposure to threats, and detect and respond to attacks. Additionally, Azure Security Center accesses existing configurations of Azure services to provide configuration and service recommendations to help improve security posture and protect data.
 
-Azure Security Center uses a variety of detection capabilities to alert customers of potential attacks targeting their environments. These alerts contain valuable information about what triggered the alert, the resources targeted, and the source of the attack. Azure Security Center has a set of [predefined security alerts](https://docs.microsoft.com/en-us/azure/security-center/security-center-alerts-type), which are triggered when a threat, or suspicious activity takes place. [Custom alert rules](https://docs.microsoft.com/en-us/azure/security-center/security-center-custom-alert) in Azure Security Center allow customers to define new security alerts based on data that is already collected from their environment.
+Azure Security Center uses a variety of detection capabilities to alert customers of potential attacks targeting their environments. These alerts contain valuable information about what triggered the alert, the resources targeted, and the source of the attack. Azure Security Center has a set of [predefined security alerts](https://docs.microsoft.com/azure/security-center/security-center-alerts-type), which are triggered when a threat, or suspicious activity takes place. [Custom alert rules](https://docs.microsoft.com/azure/security-center/security-center-custom-alert) in Azure Security Center allow customers to define new security alerts based on data that is already collected from their environment.
 
 Azure Security Center provides prioritized security alerts and incidents, making it simpler for customers to discover and address potential security issues. A [threat intelligence report](https://docs.microsoft.com/azure/security-center/security-center-threat-report) is generated for each detected threat to assist incident response teams in investigating and remediating threats.
 
@@ -175,7 +174,7 @@ Azure services extensively log system and user activity, as well as system healt
 The following Log Analytics [management solutions](https://docs.microsoft.com/azure/log-analytics/log-analytics-add-solutions) are included as a part of this architecture:
 -	[Active Directory Assessment](https://docs.microsoft.com/azure/log-analytics/log-analytics-ad-assessment): The Active Directory Health Check solution assesses the risk and health of server environments on a regular interval and provides a prioritized list of recommendations specific to the deployed server infrastructure.
 - [SQL Assessment](https://docs.microsoft.com/azure/log-analytics/log-analytics-sql-assessment): The SQL Health Check solution assesses the risk and health of server environments on a regular interval and provides customers with a prioritized list of recommendations specific to the deployed server infrastructure.
-- [Agent Health](https://docs.microsoft.com/en-us/azure/operations-management-suite/oms-solution-agenthealth): The Agent Health solution reports how many agents are deployed and their geographic distribution, as well as how many agents which are unresponsive and the number of agents which are submitting operational data.
+- [Agent Health](https://docs.microsoft.com/azure/operations-management-suite/oms-solution-agenthealth): The Agent Health solution reports how many agents are deployed and their geographic distribution, as well as how many agents which are unresponsive and the number of agents which are submitting operational data.
 -	[Activity Log Analytics](https://docs.microsoft.com/azure/log-analytics/log-analytics-activity): The Activity Log Analytics solution assists with analysis of the Azure activity logs across all Azure subscriptions for a customer.
 
 **Azure Automation**: [Azure Automation](https://docs.microsoft.com/azure/automation/automation-hybrid-runbook-worker) stores, runs, and manages runbooks. In this solution, runbooks help collect logs from Azure SQL Server. The Automation [Change Tracking](https://docs.microsoft.com/azure/automation/automation-change-tracking) solution enables customers to easily identify changes in the environment.
@@ -191,9 +190,9 @@ The data flow diagram for this reference architecture is available for [download
 
 ## Compliance documentation
 
-The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Customer Responsibility Matrix](https://aka.ms/iso-crm/) lists all security objectives required by ISO 27001 and 27018. This matrix details whether the implementation of each objective is the responsibility of Microsoft, the customer, or shared between the two.
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 Customer Responsibility Matrix](https://aka.ms/iso-crm/) lists all security requirements required by ISO 27001 and 27018. This matrix details whether the implementation of each requirement is the responsibility of Microsoft, the customer, or shared between the two.
 
-The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 IaaS Web Application Implementation Matrix](https://aka.ms/iso-iaaswa-cim/) provides information on which ISO 27001 and 27018 requirements are addressed by the IaaS web application architecture, including detailed descriptions of how the implementation meets the requirements of each covered objective.
+The [Azure Security and Compliance Blueprint – ISO 27001 and 27018 IaaS Web Application Implementation Matrix](https://aka.ms/iso-iaaswa-cim/) provides information on which ISO 27001 and 27018 requirements are addressed by the IaaS web application architecture, including detailed descriptions of how the implementation meets the requirements of each covered requirement.
 
 ## Guidance and recommendations
 
